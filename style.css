@@ -84,29 +84,40 @@ section.active {
 }
 
 .menu-card {
-    background: white;
-    padding: 20px 10px;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: white !important;
+    border-radius: 24px !important; /* Membuat sudut kotak lebih melengkung modern */
+    padding: 45px 15px !important;  /* << KUNCI UTAMA: Ditambah padding atas-bawah (45px) agar kotak memanjang tinggi */
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important; /* Memastikan isi icon & teks pas di tengah kotak */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
+    box-sizing: border-box !important;
+    min-height: 160px !important;  /* Batas tinggi minimal kotak agar konsisten kokoh di semua tipe HP */
 }
 
-.menu-card:hover {
-    transform: translateY(-5px);
-}
-
-.menu-card h3 {
-    color: #000;
-    font-size: 0.9rem;
-    margin-top: 10px;
-}
-
+/* 3. Memperbesar Ikon di Dalam Kotak Agar Seimbang dengan Ukuran Kartu */
 .icon-box img {
-    width: 50px;
-    height: 50px;
+    width: 65px !important;        /* Dinaikkan dari 50px agar ikon ikut membesar proporsional */
+    height: 65px !important;
+    object-fit: contain !important;
+}
+
+/* 4. Merapikan Tulisan Menu */
+.menu-card h3 {
+    color: #000000 !important;
+    font-size: 1rem !important;    /* Sedikit dipertegas ukuran font-nya */
+    font-weight: 700 !important;
+    margin-top: 15px !important;   /* Jarak antara ikon besar dan teks menu */
+    text-align: center !important;
+}
+
+/* Efek angkat saat di-klik/hover */
+.menu-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 12px 25px rgba(0, 123, 255, 0.3) !important;
 }
 
 /* --- LOADING --- */
@@ -760,12 +771,90 @@ section {
     letter-spacing: 1px;
 }
 
-/* Navigasi Global untuk Semua Halaman agar Seragam */
 .app-nav {
-    align-self: flex-start; /* Mengunci navigasi tetap di kiri atas halaman */
-    width: 100%;
-    text-align: left;
-    margin-bottom: 25px;
+    width: 100% !important;
+    display: block !important;
+    text-align: left !important;
+    padding: 10px 0 10px 0 !important;
+    position: relative !important; /* Sebagai jangkar tombol logout */
+    box-sizing: border-box !important;
+}
+
+.app-nav h1 {
+    font-size: 2.2rem !important;
+    color: #007bff !important;
+    font-weight: 800 !important;
+    margin: 5px 0 0 0 !important;
+    text-align: left !important;
+    line-height: 1.1 !important;
+}
+
+.app-nav p {
+    font-size: 0.9rem !important;
+    color: #ccc !important;
+    margin: 6px 0 0 0 !important;
+    text-align: left !important;
+}
+
+/* 3. Tombol Logout Sejajar Presisi di Pojok Kanan Atas Menu Utama */
+.app-nav .logout-icon-btn {
+    position: absolute !important;
+    right: 0 !important;
+    top: 10px !important;
+    background: #111 !important;
+    color: #ff4d4d !important;
+    border: 1px solid #333 !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+}
+
+.app-nav .logout-icon-btn:hover {
+    background: #ff4d4d !important;
+    color: white !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4) !important;
+}
+/* --- PENYESUAIAN CONTAINER UTAMA SUPAYA SEIMBANG --- */
+section.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Konten isi kartu/kuis tetap rapi di tengah, tapi headernya mengunci di kiri karena aturan .app-nav di atas */
+    width: 90%;
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* 1. Memaksa halaman Menu Utama dan Quiz agar menempel dari langit-langit atas layar */
+#main-menu.active, #quiz-page.active {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* << KUNCI UTAMA: Memaksa konten rata atas, bukan di tengah layar */
+    justify-content: flex-start !important;
+    width: 90% !important;
+    max-width: 450px !important;
+    margin: 0 auto !important;
+    padding-top: 20px !important; /* Beri sedikit jarak manis dari ujung layar atas HP */
+}
+
+/* 4. Menjaga Konsistensi Grid Menu dan Tombol Audio */
+.menu-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 15px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+}
+
+.audio-bottom-box {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-top: 30px !important;
 }
 
 /* Mengunci style tombol kembali desain asli Mutiara */
@@ -968,31 +1057,44 @@ section {
     margin: 0 auto 15px auto;
     text-align: left;
 }
-/* --- AMANKAN MENU UTAMA: KUNCI HEADER DI POJOK ATAS LAYAR --- */
+/* --- AMANKAN MENU UTAMA: PAKSA JUDUL MENEMPEL DI ATAS LAYAR HP --- */
 #main-menu.active {
-    display: block !important; /* Biarkan elemen di bawah mengalir natural */
+    display: block !important;
     width: 100%;
     max-width: 450px;
     margin: 0 auto;
-    padding: 85px 15px 20px 15px; /* Beri padding atas (85px) agar kartu menu tidak menabrak judul yang dikunci di atas */
+    /* Beri jarak padding atas yang besar agar kartu menu utama turun ke bawah dan TIDAK menabrak judul */
+    padding: 110px 15px 20px 15px !important; 
     position: relative;
     box-sizing: border-box;
 }
 
-/* KUNCI JUDUL & LOGOUT DI POJOK ATAS SECARA ABSOLUTE (KONSISTEN DI SEMUA HP) */
+/* KUNCI TETAP (FIXED) LANGSUNG PADA LAYAR HP PALING ATAS */
 .menu-top-bar {
-    position: absolute; /* Dipaksa keluar dari aturan flexbox card */
-    top: 15px;          /* Kunci jarak dari atas layar */
-    left: 15px;         /* Kunci jarak dari kiri layar */
-    right: 15px;        /* Kunci jarak dari kanan layar */
-    display: flex;
+    position: fixed !important; /* Paksa mengunci langsung ke frame layar HP */
+    top: 0 !important;          /* Tempel paling atas */
+    left: 0 !important;         /* Tempel paling kiri */
+    width: 100% !important;     /* Lebar penuh memenuhi layar */
+    max-width: 450px !important;/* Batasi lebar agar tetap sinkron dengan card-mu */
+    background-color: #000000 !important; /* Beri warna hitam solid agar menutupi elemen di belakangnya saat di-scroll */
+    display: flex !important;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #222; /* Beri garis pembatas tipis estetik agar terpisah dari card */
-    padding-bottom: 12px;
+    padding: 20px 20px 12px 20px !important; /* Beri ruang kenyamanan tombol logout dan judul */
+    border-bottom: 1px solid #222 !important; /* Garis batas tipis */
+    z-index: 9999 !important;   /* Angka tertinggi agar dia berada di lapisan paling atas, tidak tertimbun komponen lain */
     box-sizing: border-box;
 }
-
+/* Sesuaikan letak teks Halo Mutiara agar pas di bawah garis bar atas */
+#welcome-user {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #fff;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+    text-align: left !important;
+    width: 100%;
+}
 .logo-text {
     font-size: 2.2rem;
     color: #007bff;
