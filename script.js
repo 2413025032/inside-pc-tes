@@ -394,3 +394,64 @@ function toggleMusic() {
     }
     isMusicPlaying = !isMusicPlaying;
 }
+// =========================================================================
+// ADAPTASI MOBILE TOUCH EVENTS UNTUK FITUR SIMULASI MERAKIT
+// =========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+    const trayImages = document.querySelectorAll(".tray-item img");
+    const pcTarget = document.getElementById("pc-target");
+    let activeDraggedId = null;
+
+    trayImages.forEach(img => {
+        // 1. Saat jempol siswa mulai menyentuh ikon komponen
+        img.addEventListener("touchstart", function(e) {
+            activeDraggedId = this.id; // Catat ID komponen yang dipegang
+        }, { passive: true });
+
+        // 2. Saat jempol bergerak menggeser ikon di layar HP
+        img.addEventListener("touchmove", function(e) {
+            // Kunci layar agar halaman web tidak ikut tergulung (scroll) naik-turun saat merakit
+            if (e.cancelable) e.preventDefault(); 
+        }, { passive: false });
+
+        // 3. Saat jempol dilepas dari layar HP
+        img.addEventListener("touchend", function(e) {
+            if (!activeDraggedId) return;
+
+            // Tangkap koordinat akhir di mana jempol siswa dilepas
+            const touch = e.changedTouches[0];
+            const targetRect = pcTarget.getBoundingClientRect();
+
+            // Validasi geometri: Apakah koordinat jempol berada di dalam area kotak casing?
+            if (
+                touch.clientX >= targetRect.left &&
+                touch.clientX <= targetRect.right &&
+                touch.clientY >= targetRect.top &&
+                touch.clientY <= targetRect.bottom
+            ) {
+                // Jika pas di dalam casing, eksekusi drop khusus mobile
+                executeMobileDrop(activeDraggedId);
+            }
+            activeDraggedId = null; // Bersihkan data drag
+        });
+    });
+
+    // Fungsi jembatan untuk mengeksekusi instalasi komponen di HP
+    function executeMobileDrop(draggedId) {
+        if (draggedId === "drag-motherboard" && assembledCount === 0) {
+            triggerHybridInstallation("effect-motherboard", draggedId);
+        } else if (draggedId === "drag-psu" && assembledCount === 1) {
+            triggerHybridInstallation("effect-psu", draggedId);
+        } else if (draggedId === "drag-cpu" && assembledCount === 2) {
+            triggerHybridInstallation("effect-cpu", draggedId);
+        } else if (draggedId === "drag-storage" && assembledCount === 3) {
+            triggerHybridInstallation("effect-storage", draggedId);
+        } else if (draggedId === "drag-ram" && assembledCount === 4) {
+            triggerHybridInstallation("effect-ram", draggedId);
+        } else if (draggedId === "drag-gpu" && assembledCount === 5) {
+            triggerHybridInstallation("effect-gpu", draggedId);
+        } else {
+            alert("Urutan perakitan salah! Ikuti petunjuk standarnya ya.");
+        }
+    }
+});
