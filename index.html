@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inside PC - Explore, Learn, Build</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- SECTION 1: LOGIN PAGE -->
+    <section id="login-page" class="active">
+        <div class="login-container">
+            <h1>Inside PC</h1>
+            <p>Silakan masuk untuk memulai belajar</p>
+            <input type="text" id="username" placeholder="Masukkan Nama Anda..." required>
+            <input type="text" id="npm" placeholder="Masukkan NPM Anda..." required>
+            <button onclick="startApp()">Masuk</button>
+        </div>
+    </section>
+
+    <!-- SECTION 2: LOADING PAGE -->
+    <section id="loading-page">
+        <div class="loading-container">
+            <h2>Inside PC</h2>
+            <p>Explore, Learn, Build.</p>
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+            <p id="progress-text">0%</p>
+        </div>
+    </section>
+
+<!-- SECTION 3: MENU UTAMA -->
+    <section id="main-menu">
+        <div class="menu-top-bar">
+            <div class="logo-wrapper">
+                <h1 class="logo-text">Inside PC</h1>
+                <p class="tagline">Explore, Learn, Build.</p>
+            </div>
+            
+            <button class="logout-icon-btn" onclick="location.reload()" title="Keluar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                    <polyline points="16 17 21 12 16 7"></polyline>
+                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                </svg>
+            </button>
+        </div>
+
+        <h2 id="welcome-user">Halo, User!</h2>
+
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openPage('explore')">
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/908/908424.png" alt="Eksplor"></div>
+                <h3>Eksplor PC</h3>
+            </div>
+            <div class="menu-card" onclick="openPage('assemble')">
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/3067/3067451.png" alt="Merakit"></div>
+                <h3>Merakit</h3>
+            </div>
+            <div class="menu-card" onclick="openPage('quiz')">
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" alt="Quiz"></div>
+                <h3>Quiz</h3>
+            </div>
+            <div class="menu-card" onclick="openPage('about')">
+                <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/471/471663.png" alt="Tentang"></div>
+                <h3>Tentang</h3>
+            </div>
+        </div>
+
+        <div class="audio-bottom-box">
+            <button class="audio-btn" onclick="toggleMusic()">🔊</button>
+        </div>
+    </section>
+
+<!--section 4-->
+    <section id="explore-page">
+        <div class="explore-nav" style="text-align: left; width: 100%; margin-bottom: 20px; position: relative;">
+            <button class="back-btn" onclick="backToMenu()" style="background: none; border: none; color: #007bff; cursor: pointer; font-weight: bold; display: flex; align-items: center; gap: 5px;">
+                <span style="font-size: 1.2rem;">❮</span> Kembali
+            </button>
+            <h1 style="margin-top: 10px;">Inside PC</h1>
+            <p style="color: #ccc;">Eksplor PC</p>
+
+            <button class="guide-floating-btn" onclick="toggleGuideModal(true)" title="Panduan Urutan Perakitan">📋</button>
+        </div>
+
+        <div class="explore-container">
+            <div class="visual-wrapper">
+                <div class="pc-visual">
+                    <img src="assets/CPU.png" id="main-pc-img">
+                    <div id="hardware-pointer" class="pointer"></div>
+                </div>
+                <div class="info-bubble">
+                    <h4 id="bubble-name">Eksplor PC</h4>
+                    <p id="bubble-desc">Pilih salah satu komponen dari menu di bawah untuk melihat detail penjelasannya.</p>
+                </div>
+            </div>
+
+            <div class="hardware-sidebar">
+                <button class="side-item" onclick="highlight(this, 'CPU')">🔳 CPU</button>
+                <button class="side-item" onclick="highlight(this, 'RAM')">📏 RAM</button>
+                <button class="side-item" onclick="highlight(this, 'GPU')">🎮 GPU</button>
+                <button class="side-item" onclick="highlight(this, 'Power Supply')">🔌 Power Supply</button>
+                <button class="side-item" onclick="highlight(this, 'Storage')">💾 Storage</button>
+                <button class="side-item" onclick="highlight(this, 'Motherboard')">📟 Motherboard</button>
+            </div>
+        </div>
+
+        <div id="guide-modal" class="guide-overlay" style="display: none;">
+            <div class="guide-box">
+                <h3>📋 Urutan Perakitan PC</h3>
+                <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 15px;">Ikuti urutan logis ini pada simulasi merakit:</p>
+                
+                <ol class="guide-list">
+                    <li><span>1</span> 📟 Motherboard</li>
+                    <li><span>2</span> 🔌 Power Supply (PSU)</li>
+                    <li><span>3</span> 🔳 CPU + FAN</li>
+                    <li><span>4</span> 💾 Storage (HDD/SSD)</li>
+                    <li><span>5</span> 📏 RAM</li>
+                    <li><span>6</span> 🎮 GPU (Graphics Card)</li>
+                </ol>
+
+                <button class="close-guide-btn" onclick="toggleGuideModal(false)">Mengerti</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: SIMULASI MERAKIT -->
+    <section id="assemble-page">
+        <div class="app-nav">
+            <button class="back-btn" onclick="backToMenu()">❮ Kembali</button>
+            <h1 style="margin-top: 10px;">Inside PC</h1>
+            <p style="color: #ccc;">Merakit</p>
+        </div>
+
+        <div class="assemble-container">
+            <div id="pc-target" class="target-area">
+                <img src="assets/casingkosong.png" id="main-casing-img" style="width: 100%; border-radius: 15px;">
+                
+                <div id="effect-motherboard" class="effect-layer orientation-mb"></div>
+                <div id="effect-psu" class="effect-layer orientation-psu"></div>
+                <div id="effect-cpu" class="effect-layer orientation-cpu"></div>
+                <div id="effect-storage" class="effect-layer orientation-storage"></div>
+                <div id="effect-ram" class="effect-layer orientation-ram"></div>
+                <div id="effect-gpu" class="effect-layer orientation-gpu"></div>
+            </div>
+
+            <div class="progress-container">
+                <p style="margin-bottom: 5px; font-size: 0.9rem; color: #aaa;">Progres Perakitan</p>
+                <div class="progress-bar-small">
+                    <div id="assemble-progress" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <div class="component-tray">
+                <div class="tray-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/908/908412.png" id="drag-motherboard" draggable="true" ondragstart="drag(event)">
+                    <p>Motherboard</p>
+                </div>
+                <div class="tray-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/471/471663.png" id="drag-psu" draggable="true" ondragstart="drag(event)">
+                    <p>Power Supply</p>
+                </div>
+                <div class="tray-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/908/908424.png" id="drag-cpu" draggable="true" ondragstart="drag(event)">
+                    <p>CPU+FAN</p>
+                </div>
+                <div class="tray-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3407/3407024.png" id="drag-storage" draggable="true" ondragstart="drag(event)">
+                    <p>Storage</p>
+                </div>
+                <div class="tray-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2906/2906274.png" id="drag-ram" draggable="true" ondragstart="drag(event)">
+                    <p>RAM</p>
+                </div>
+                <div class="tray-item">
+                    <img src="https://cdn-icons-png.flaticon.com/512/3067/3067451.png" id="drag-gpu" draggable="true" ondragstart="drag(event)">
+                    <p>GPU</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- SECTION 6: QUIZ -->
+<!-- SECTION 6: QUIZ -->
+    <section id="quiz-page">
+        <div class="app-nav">
+            <button class="back-btn" onclick="backToMenu()">❮ Kembali</button>
+            <h1 style="margin-top: 10px;">Inside PC</h1>
+            <p style="color: #ccc;">Uji Pemahaman</p>
+        </div>
+
+        <div class="quiz-container">
+            <div id="quiz-start-screen" class="quiz-card-layout">
+                <div style="font-size: 4rem; margin-bottom: 10px;">🎮</div>
+                <h2>Siap Uji Pemahaman?</h2>
+                <p style="color: #aaa; font-size: 0.9rem; margin: 15px 0 25px 0; line-height: 1.5;">
+                    Kuis ini berisi 5 soal seputar komponen hardware PC yang sudah kamu pelajari. Selesaikan kuis untuk mengunci skor terbaikmu!
+                </p>
+                <button class="primary-btn" onclick="startQuizGameplay()" style="width: 100%; justify-content: center;">Mulai Kuis 🚀</button>
+            </div>
+
+            <div id="quiz-locked-screen" class="quiz-card-layout" style="display: none;">
+                <div style="font-size: 4rem; margin-bottom: 10px;">🏆</div>
+                <h3 style="color: #aaa;">Skor Tersimpan:</h3>
+                <h1 id="locked-score-text" style="font-size: 4rem; color: #28a745; margin: 10px 0;">0 / 100</h1>
+                <p id="locked-summary-text" style="margin-bottom: 25px; color: #eee; font-size: 0.9rem;"></p>
+                <button class="secondary-btn" onclick="triggerRestartQuiz()" style="width: 100%; border-color: #007bff; color: #007bff;">Ulangi Kuis 🔄</button>
+            </div>
+
+            <div id="quiz-main-content" style="display: none; width: 100%;">
+                <div class="quiz-header">
+                    <p id="question-number">Soal 1 / 5</p>
+                    <div class="progress-bar-small">
+                        <div id="quiz-progress" style="width: 20%;"></div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-image">
+                        <img id="q-img" src="assets/CPU.png" alt="Hardware">
+                    </div>
+                    <div class="question-content">
+                        <h3 id="question-text">Memuat Pertanyaan...</h3>
+                        <div class="options-container">
+                            <button class="option" onclick="checkAnswer(0)"><span>A</span> <p id="opt0"></p></button>
+                            <button class="option" onclick="checkAnswer(1)"><span>B</span> <p id="opt1"></p></button>
+                            <button class="option" onclick="checkAnswer(2)"><span>C</span> <p id="opt2"></p></button>
+                            <button class="option" onclick="checkAnswer(3)"><span>D</span> <p id="opt3"></p></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="feedback-overlay" class="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 100; justify-content: center; align-items: center;">
+            <div id="feedback-box" style="background: #1a1a1a; padding: 30px; border-radius: 20px; text-align: center; max-width: 400px; border: 2px solid #007bff; color: white;">
+                <div id="feedback-icon" style="font-size: 50px; margin-bottom: 10px;"></div>
+                <h2 id="feedback-status"></h2>
+                <p id="feedback-text" style="color: #ccc; margin: 15px 0; line-height: 1.5;"></p>
+                <button class="primary-btn" onclick="nextQuestion()" style="background: #007bff; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; justify-content: center;">Lanjutkan</button>
+            </div>
+        </div>
+
+        <div id="quiz-result-overlay" class="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 110; justify-content: center; align-items: center;">
+            <div style="background: #111; padding: 40px; border-radius: 25px; text-align: center; color: white; border: 1px solid #28a745; max-width: 360px; width: 85%;">
+                <h3 style="color: #aaa;">Kuis Selesai!</h3>
+                <h1 id="final-score" style="font-size: 4rem; color: #28a745; margin: 10px 0;">0 / 100</h1>
+                <p id="quiz-summary" style="margin: 20px 0; color: #eee; font-size: 0.9rem;"></p>
+                <button class="primary-btn" onclick="finishQuizGameplay()" style="background: #28a745; color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; justify-content: center;">Simpan & Kembali Keluar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: TENTANG -->
+    <section id="about-page">
+        <div class="app-nav">
+            <button class="back-btn" onclick="backToMenu()">❮ Kembali</button>
+            <h1 style="margin-top: 10px;">Inside PC</h1>
+            <p style="color: #ccc;">Tentang Aplikasi</p>
+        </div>
+
+        <div class="about-container" style="background: #1a1a1a; padding: 30px; border-radius: 25px; margin-top: 20px; text-align: center; color: white; border: 1px solid #333;">
+            <div class="app-info" style="margin-bottom: 30px;">
+                <h2 style="color: #007bff; margin-bottom: 10px;">Inside PC v1.0</h2>
+                <p style="color: #aaa; line-height: 1.6;">
+                    Inside PC adalah media pembelajaran interaktif berbasis web yang dirancang untuk membantu mahasiswa 
+                    mengenal komponen hardware komputer dan simulasi perakitannya dengan cara yang menyenangkan.
+                </p>
+            </div>
+
+            <div class="developer-info" style="border-top: 1px solid #333; padding-top: 20px;">
+                <h3 style="margin-bottom: 15px;">Pengembang</h3>
+                
+                <div class="dev-avatar-container">
+                    <img src="assets/profile.jpg" alt="Foto Mutiara Salsabilla" class="dev-avatar-img">
+                </div>
+                
+                <h4 style="font-size: 1.2rem; margin-bottom: 5px;">Mutiara Salsabilla</h4>
+                <p style="color: #00d4ff; font-weight: bold;">Pendidikan Teknologi Informasi</p>
+                <p style="color: #777;">Universitas Lampung</p>
+            </div>
+
+            <div class="tech-stack" style="margin-top: 30px; display: flex; justify-content: center; gap: 15px; font-size: 0.8rem; color: #555;">
+                <span>HTML5</span> • <span>CSS3</span> • <span>JavaScript</span>
+            </div>
+        </div>
+    </section>
+
+    <audio id="bg-music" src="assets/backsound.mp3" loop></audio>
+    <script src="script.js"></script>
+</body>
+</html>
