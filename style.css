@@ -26,19 +26,24 @@ section {
 }
 
 section.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Konten tetap di tengah */
-    width: 90%;
-    margin: 0 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Semua konten utama berada di tengah yang seimbang */
+    width: 100% !important;
+    max-width: 500px !important; /* Mengunci lebar maksimal agar tetap estetik menyerupai aplikasi mobile di desktop */
+    margin: 0 auto !important;
+    padding: 30px 20px !important;
+    box-sizing: border-box !important;
 }
 
-/* --- PERBAIKAN LOGIN (Agar Vertikal) --- */
+/* 1. PERBAIKAN FORM LOGIN (KEMBALI PANJANG & PROPORSIONAL) */
 .login-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column; /* Ini kuncinya agar input ke bawah */
-    gap: 15px;
+    width: 100% !important;
+    max-width: 400px !important; /* Membatasi agar kotak login tidak melebar berantakan di desktop */
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 15px !important;
+    margin: 0 auto !important;
 }
 
 .login-container h1 {
@@ -85,17 +90,17 @@ section.active {
 
 .menu-card {
     background: white !important;
-    border-radius: 24px !important; /* Membuat sudut kotak lebih melengkung modern */
-    padding: 45px 15px !important;  /* << KUNCI UTAMA: Ditambah padding atas-bawah (45px) agar kotak memanjang tinggi */
+    border-radius: 24px !important;
+    padding: 35px 15px !important; /* Membuat kotak menu lebih tinggi ke atas-bawah */
     cursor: pointer !important;
     transition: all 0.3s ease !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important; /* Memastikan isi icon & teks pas di tengah kotak */
+    justify-content: center !important;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4) !important;
     box-sizing: border-box !important;
-    min-height: 160px !important;  /* Batas tinggi minimal kotak agar konsisten kokoh di semua tipe HP */
+    min-height: 150px !important; /* Mengunci tinggi minimum kotak menu */
 }
 
 /* 3. Memperbesar Ikon di Dalam Kotak Agar Seimbang dengan Ukuran Kartu */
@@ -773,10 +778,10 @@ section {
 
 .app-nav {
     width: 100% !important;
-    display: block !important;
     text-align: left !important;
-    padding: 10px 0 10px 0 !important;
-    position: relative !important; /* Sebagai jangkar tombol logout */
+    margin-bottom: 25px !important;
+    position: relative !important;
+    display: block !important;
     box-sizing: border-box !important;
 }
 
@@ -819,15 +824,6 @@ section {
     color: white !important;
     box-shadow: 0 0 15px rgba(255, 77, 77, 0.4) !important;
 }
-/* --- PENYESUAIAN CONTAINER UTAMA SUPAYA SEIMBANG --- */
-section.active {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Konten isi kartu/kuis tetap rapi di tengah, tapi headernya mengunci di kiri karena aturan .app-nav di atas */
-    width: 90%;
-    max-width: 450px;
-    margin: 0 auto;
-}
 
 /* 1. Memaksa halaman Menu Utama dan Quiz agar menempel dari langit-langit atas layar */
 #main-menu.active, #quiz-page.active {
@@ -848,13 +844,6 @@ section.active {
     gap: 15px !important;
     width: 100% !important;
     margin-top: 20px !important;
-}
-
-.audio-bottom-box {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: flex-end !important;
-    margin-top: 30px !important;
 }
 
 /* Mengunci style tombol kembali desain asli Mutiara */
@@ -1071,19 +1060,14 @@ section.active {
 
 /* KUNCI TETAP (FIXED) LANGSUNG PADA LAYAR HP PALING ATAS */
 .menu-top-bar {
-    position: fixed !important; /* Paksa mengunci langsung ke frame layar HP */
-    top: 0 !important;          /* Tempel paling atas */
-    left: 0 !important;         /* Tempel paling kiri */
-    width: 100% !important;     /* Lebar penuh memenuhi layar */
-    max-width: 450px !important;/* Batasi lebar agar tetap sinkron dengan card-mu */
-    background-color: #000000 !important; /* Beri warna hitam solid agar menutupi elemen di belakangnya saat di-scroll */
+    position: relative !important; /* Mengembalikan fungsi penahan posisi absolute */
+    width: 100% !important;
     display: flex !important;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 20px 12px 20px !important; /* Beri ruang kenyamanan tombol logout dan judul */
-    border-bottom: 1px solid #222 !important; /* Garis batas tipis */
-    z-index: 9999 !important;   /* Angka tertinggi agar dia berada di lapisan paling atas, tidak tertimbun komponen lain */
-    box-sizing: border-box;
+    justify-content: space-between !important; /* Judul di kiri, tombol logout di kanan */
+    align-items: center !important;
+    margin-bottom: 25px !important;
+    padding-bottom: 10px !important;
+    border-bottom: 1px solid #222 !important;
 }
 /* Sesuaikan letak teks Halo Mutiara agar pas di bawah garis bar atas */
 #welcome-user {
@@ -1119,40 +1103,40 @@ section.active {
 
 /* TOMBOL LOGOUT SEJAJAR POJOK KANAN ATAS */
 .logout-icon-btn {
-    background: #111;
-    color: #ff4d4d; /* Warna merah tegas penanda logout */
-    border: 1px solid #333;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    background: #111 !important;
+    color: #ff4d4d !important;
+    border: 1px solid #333 !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
 }
-
 .logout-icon-btn:hover {
-    background: #ff4d4d;
-    color: white;
-    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4);
-    transform: scale(1.05);
+    background: #ff4d4d !important;
+    color: white !important;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.4) !important;
 }
 
 /* GRID UTAMA */
 .menu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 80px; /* Jarak aman agar tidak menumpuk dengan tombol audio bawah */
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 15px !important;
+    width: 100% !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
 }
 
 /* WADAH AUDIO DI KANAN BAWAH */
 .audio-bottom-box {
-    position: absolute;
-    right: 5px;
-    bottom: -50px; /* Mengunci di pojok kanan bawah container */
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    margin-top: 20px !important;
 }
 
 .audio-btn {
@@ -1196,9 +1180,10 @@ section.active {
     object-position: center; /* Memastikan fokus foto tetap di tengah */
 }
 /* --- FIX FINAL: MATIKAN LONG-PRESS UNDUH GAMBAR DI HP --- */
+/* --- ANTI LONG-PRESS UNDUH GAMBAR DI HP --- */
 .component-tray img, .tray-item {
-    -webkit-touch-callout: none !important; /* Matikan pop-up menu simpan gambar di Android/iOS */
-    -webkit-user-select: none !important;    /* Matikan seleksi teks/gambar */
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
     user-select: none !important;
     pointer-events: auto;
 }
