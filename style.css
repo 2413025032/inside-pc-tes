@@ -968,25 +968,29 @@ section {
     margin: 0 auto 15px auto;
     text-align: left;
 }
-/* --- FIX FINAL: FORMAT MENU UTAMA BIAR JUDUL TETAP DI ATAS POJOK KIRI --- */
+/* --- AMANKAN MENU UTAMA: KUNCI HEADER DI POJOK ATAS LAYAR --- */
 #main-menu.active {
-    display: block !important; /* Diubah ke block agar tidak membagi ruang secara flex vertikal */
+    display: block !important; /* Biarkan elemen di bawah mengalir natural */
     width: 100%;
-    max-width: 450px; /* Sesuai frame mobile */
+    max-width: 450px;
     margin: 0 auto;
-    padding: 15px 15px;
+    padding: 85px 15px 20px 15px; /* Beri padding atas (85px) agar kartu menu tidak menabrak judul yang dikunci di atas */
     position: relative;
     box-sizing: border-box;
 }
 
-/* Memastikan barisan atas (Judul & Logout) sejajar lurus */
+/* KUNCI JUDUL & LOGOUT DI POJOK ATAS SECARA ABSOLUTE (KONSISTEN DI SEMUA HP) */
 .menu-top-bar {
+    position: absolute; /* Dipaksa keluar dari aturan flexbox card */
+    top: 15px;          /* Kunci jarak dari atas layar */
+    left: 15px;         /* Kunci jarak dari kiri layar */
+    right: 15px;        /* Kunci jarak dari kanan layar */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    margin-bottom: 25px; /* Jarak aman ke teks Halo */
-    padding-top: 10px;
+    border-bottom: 1px solid #222; /* Beri garis pembatas tipis estetik agar terpisah dari card */
+    padding-bottom: 12px;
+    box-sizing: border-box;
 }
 
 .logo-text {
