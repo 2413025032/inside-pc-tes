@@ -968,25 +968,25 @@ section {
     margin: 0 auto 15px auto;
     text-align: left;
 }
-/* --- FORMAT UTAMA MENU UTAMA MOBILE FRIENDLY --- */
+/* --- FIX FINAL: FORMAT MENU UTAMA BIAR JUDUL TETAP DI ATAS POJOK KIRI --- */
 #main-menu.active {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Mengunci semua elemen rata kiri */
+    display: block !important; /* Diubah ke block agar tidak membagi ruang secara flex vertikal */
     width: 100%;
-    max-width: 450px; /* Ukuran frame mobile */
+    max-width: 450px; /* Sesuai frame mobile */
     margin: 0 auto;
-    padding: 10px 5px;
+    padding: 15px 15px;
     position: relative;
+    box-sizing: border-box;
 }
 
-/* TOP BAR: Menjaga Judul di Kiri dan Logo Logout di Kanan Sejajar */
+/* Memastikan barisan atas (Judul & Logout) sejajar lurus */
 .menu-top-bar {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Jarak aman ke teks Halo */
+    padding-top: 10px;
 }
 
 .logo-text {
@@ -1088,4 +1088,11 @@ section {
     height: 100%;
     object-fit: cover; /* Mencegah foto menjadi gepeng/ketarik */
     object-position: center; /* Memastikan fokus foto tetap di tengah */
+}
+/* --- FIX FINAL: MATIKAN LONG-PRESS UNDUH GAMBAR DI HP --- */
+.component-tray img, .tray-item {
+    -webkit-touch-callout: none !important; /* Matikan pop-up menu simpan gambar di Android/iOS */
+    -webkit-user-select: none !important;    /* Matikan seleksi teks/gambar */
+    user-select: none !important;
+    pointer-events: auto;
 }
