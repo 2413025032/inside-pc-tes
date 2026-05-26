@@ -11,7 +11,7 @@ function startApp() {
     const name = document.getElementById('username').value;
     const npm = document.getElementById('npm').value;
     if (name === "" || npm === "") {
-        alert("Harap isi Nama dan NPM ya!");
+        alert("Harap isi Nama dan NISN ya!");
         return;
     }
     localStorage.setItem('userName', name);
